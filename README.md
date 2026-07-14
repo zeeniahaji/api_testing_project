@@ -21,13 +21,14 @@
 4. [Getting Started](#-getting-started)
 5. [CI/CD Pipeline](#-cicd-pipeline)
 6. [Collaboration & Hand-over](#-collaboration--hand-over)
-7. [Meet the Collaborators](#-meet-the-collaborators)
+7. [Full Stack Analysis & Security Guidelines](#-full-stack-analysis--security-guidelines)
+8. [Meet the Collaborators](#-meet-the-collaborators)
 
 ---
 
 ## ✨ Key Features
 
-*   **POJO Response Mapping**: Uses Jackson ObjectMapper for precise serialization and deserialization of API responses.
+*   **POJO Response Mapping**: Uses Jackson ObjectMapper for precise serialisation and deserialisation of API responses.
 *   **Decoupled ApiClient**: Isolates HTTP requests and RestAssured settings from the assertions layer.
 *   **Automated Content-Type Parsing**: Registers a custom global parser to handle standard HTML-based payloads safely.
 *   **Mockito Mocking**: Runs fast offline unit tests for business logic without firing real HTTP requests.
@@ -199,6 +200,30 @@ When extending this framework or introducing updates:
     *   Reflect any endpoint updates in the `pojos` package.
 3.  **Offline Logic Testing**:
     *   Write Mockito unit tests in the `unit` package for any logic processing to avoid relying on external resources during fast test runs.
+
+---
+
+## 🛡️ Full Stack Analysis & Security Guidelines
+
+### 🔑 Credentials & Secrets Management
+*   **Best Practice**: Avoid hardcoding authentication credentials (e.g. passwords, API keys) inside test files.
+*   **Implementation**: Retrieve values dynamically using environment variables (`System.getenv("TEST_USER_PASSWORD")`) or configure local `.properties` files that are ignored by Git. Keep `.env` and `config.properties` registered in your `.gitignore` file.
+
+### 🚦 Rate Limiting & Transient Errors
+*   **Best Practice**: Running integration tests continuously on live endpoints can trigger rate limits or web application firewalls.
+*   **Implementation**: Configure test retry rules (using libraries like `junit-pioneer`) and include back-off delays if execution volume is high.
+
+### 🧪 Soft Assertions
+*   **Best Practice**: Avoid halting test execution on the first minor assertion failure if multiple data fields need to be checked.
+*   **Implementation**: Utilise JUnit 5 `Assertions.assertAll()` to execute multiple checks in a single test block and receive a aggregated report of all failures.
+
+### 🧵 Parallel Test Execution
+*   **Best Practice**: Minimise build times by running independent integration tests in parallel.
+*   **Implementation**: Configure `junit.jupiter.execution.parallel.enabled = true` in `src/test/resources/junit-platform.properties`.
+
+### 📝 Structured Logging
+*   **Best Practice**: Decouple test logging from raw standard console stdout.
+*   **Implementation**: Direct RestAssured logs to an SLF4J logger facade using logback or log4j2 for structured JSON parsing and aggregation.
 
 ---
 

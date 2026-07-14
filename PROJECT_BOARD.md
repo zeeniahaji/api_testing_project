@@ -20,7 +20,7 @@ This document represents the project's Scrum board for Sprint 1.
 
 ###  5. Done
 - [x] Create Testing framework skeleton (`pom.xml`, `.gitignore`, directories)
-- [x] Create POJO response models for serialization/deserialization (`Product`, `Brand`, etc.)
+- [x] Create POJO response models for serialisation/deserialisation (`Product`, `Brand`, etc.)
 - [x] Create ApiClient for RestAssured HTTP calls
 - [x] Create ProductService containing product filtering business logic
 - [x] Create Mockito unit tests for helper/service methods (`ProductServiceUnitTest`)
@@ -42,7 +42,7 @@ Deliver a robust, structured API testing framework for `https://automationexerci
 - [x] All integration tests (RestAssured) pass successfully.
 - [x] Happy and sad path scenarios are covered for at least 3 endpoints.
 - [x] Full response payload data schema is validated.
-- [x] Local Git repository is initialized, staged, and committed with a clean log.
+- [x] Local Git repository is initialised, staged, and committed with a clean log.
 - [x] README.md is detailed with a class diagram and setup instructions.
 
 ---
