@@ -72,7 +72,8 @@ public class GetBrandTest {
                 .header("Content-Type", "application/json")
                 .body("""
                 {
-                    "name": "Updated Brand"
+                    "id": 1,
+                    "brand": "Updated Brand"
                 }
                 """)
                 .when()
